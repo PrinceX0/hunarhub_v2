@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HunarHub — Detailed Project Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #1a1a2e;
+    line-height: 1.75;
+    background: #fff;
+    font-size: 11.5pt;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 56px;
+  }
+
+  /* Cover Page */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: 3px solid #b8860b;
+    padding: 60px 56px;
+    page-break-after: always;
+  }
+  .cover-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 52pt;
+    color: #6b3a0a;
+    margin-bottom: 8px;
+  }
+  .cover-subtitle {
+    font-size: 13pt;
+    color: #8b6914;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  .cover-title {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+  }
+  .cover-desc {
+    font-size: 12pt;
+    color: #555;
+    max-width: 500px;
+    margin-bottom: 56px;
+  }
+  .cover-meta {
+    text-align: center;
+    font-size: 11pt;
+    color: #444;
+    line-height: 2.2;
+  }
+  .cover-meta strong { color: #1a1a2e; }
+  .cover-links {
+    margin-top: 28px;
+    font-size: 10.5pt;
+    color: #555;
+    line-height: 2.2;
+  }
+  .cover-links a { color: #6b3a0a; text-decoration: none; font-weight: 500; }
+  .cover-links a:hover { text-decoration: underline; }
+  .cover-line {
+    width: 80px;
+    height: 3px;
+    background: #b8860b;
+    margin: 24px auto;
+  }
+
+  /* Headings */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18pt;
+    color: #6b3a0a;
+    margin-top: 38px;
+    margin-bottom: 14px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e8d5a8;
+  }
+  h3 {
+    font-size: 12.5pt;
+    font-weight: 600;
+    color: #333;
+    margin-top: 22px;
+    margin-bottom: 8px;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #555;
+    margin-top: 14px;
+    margin-bottom: 6px;
+  }
+
+  p { margin-bottom: 10px; }
+  a { color: #6b3a0a; }
+
+  ul, ol {
+    margin-left: 22px;
+    margin-bottom: 12px;
+  }
+  li { margin-bottom: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 18px;
+    font-size: 10.5pt;
+  }
+  th {
+    background: #6b3a0a;
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 7px 12px;
+    border-bottom: 1px solid #e0d6c2;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #faf6ee; }
+
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+    background: #f5f0e6;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: #6b3a0a;
+  }
+  pre {
+    background: #2d2d2d;
+    color: #f0f0f0;
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-size: 9.5pt;
+    overflow-x: auto;
+    margin: 10px 0 16px;
+    line-height: 1.5;
+  }
+
+  .arch-box {
+    background: #faf6ee;
+    border: 1px solid #e0d6c2;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 14px 0;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+    line-height: 2;
+  }
+
+  .check { color: #2e7d32; font-weight: 600; }
+  .cross { color: #c62828; font-weight: 600; }
+
+  .req-table td:first-child { width: 55%; }
+  .req-table td:last-child { text-align: center; }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .feature-card {
+    border: 1px solid #e0d6c2;
+    border-radius: 6px;
+    padding: 14px;
+    background: #fdfbf7;
+  }
+  .feature-card h4 {
+    margin-top: 0;
+    color: #6b3a0a;
+    font-size: 10.5pt;
+  }
+  .feature-card p {
+    font-size: 10pt;
+    color: #555;
+    margin: 0;
+  }
+
+  .toc { margin-top: 16px; }
+  .toc a { color: #6b3a0a; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .toc li { margin-bottom: 6px; }
+
+  .page-break { page-break-before: always; }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .kpi-card {
+    background: #faf6ee;
+    border: 1px solid #e0d6c2;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .kpi-card .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 20pt;
+    color: #6b3a0a;
+    display: block;
+  }
+  .kpi-card .label {
+    font-size: 9pt;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  @media print {
+    body { font-size: 11pt; }
+    .page { padding: 36px 48px; }
+    .cover { min-height: auto; padding: 100px 48px; }
+    a { color: #6b3a0a !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover">
+  <div class="cover-logo">HunarHub</div>
+  <div class="cover-subtitle">Digital Marketplace for Local Micro-Entrepreneurs</div>
+  <div class="cover-line"></div>
+  <div class="cover-title">Detailed Project Report</div>
+  <div class="cover-desc">
+    A Full-Stack MERN Application for Digitally Empowering Local 
+    Indian Micro-Entrepreneurs — Cobblers, Potters, Tailors, Artisans & Small Vendors
+  </div>
+  <div class="cover-meta">
+    <strong>Submitted by:</strong> Prince Patel<br>
+    <strong>Program:</strong> Unified Mentor — Full Stack Web Development<br>
+    <strong>Technologies:</strong> HTML, CSS, JavaScript, Node.js, React.js, MongoDB<br>
+    <strong>Date:</strong> June 2026
+  </div>
+  <div class="cover-links">
+    <strong>GitHub Repository:</strong> <a href="https://github.com/PrinceX0/hunarhub_v2" target="_blank">github.com/PrinceX0/hunarhub_v2</a><br>
+    <strong>Live Deployment:</strong> <a href="https://hunarhub-v2.vercel.app" target="_blank">hunarhub-v2.vercel.app</a><br>
+    <strong>Backend API:</strong> <a href="https://hunarhub-api.onrender.com/api/health" target="_blank">hunarhub-api.onrender.com</a>
+  </div>
+</div>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<div class="page">
+
+<h2>Table of Contents</h2>
+<ol class="toc">
+  <li><a href="#intro">Introduction & Problem Statement</a></li>
+  <li><a href="#objectives">Project Objectives</a></li>
+  <li><a href="#scope">Scope of Work</a></li>
+  <li><a href="#tech">Technology Stack</a></li>
+  <li><a href="#arch">System Architecture</a></li>
+  <li><a href="#func-req">Functional Requirements & Implementation</a></li>
+  <li><a href="#nonfunc-req">Non-Functional Requirements</a></li>
+  <li><a href="#db">Database Design & Data Requirements</a></li>
+  <li><a href="#api">API Design & Endpoints</a></li>
+  <li><a href="#auth">Authentication & Security</a></li>
+  <li><a href="#frontend">Frontend Architecture</a></li>
+  <li><a href="#user-flow">User Flow</a></li>
+  <li><a href="#deployment">Deployment & CI/CD</a></li>
+  <li><a href="#structure">Project Folder Structure</a></li>
+  <li><a href="#kpi">Key Performance Indicators (KPIs)</a></li>
+  <li><a href="#challenges">Challenges & Solutions</a></li>
+  <li><a href="#learnings">Key Learnings</a></li>
+  <li><a href="#impact">Expected Impact</a></li>
+  <li><a href="#future">Future Enhancements</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ol>
+
+<!-- ==================== 1. INTRODUCTION ==================== -->
+<h2 id="intro">1. Introduction & Problem Statement</h2>
+
+<h3>1.1 Context</h3>
+<p>Millions of micro-entrepreneurs across India — cobblers, potters (kumhar), tailors, artisans, and small vendors — possess valuable skills honed over generations. However, they lack digital visibility and modern channels to reach customers. Most rely entirely on foot traffic and word-of-mouth, which limits income growth, geographic reach, and long-term sustainability.</p>
+
+<p><strong>HunarHub</strong> (Hindi: "हुनर" means skill/craft) is a full-stack web application built to solve this problem. It provides a centralized digital marketplace where micro-entrepreneurs can showcase their skills, sell handmade products, and accept custom service requests — while customers can easily discover and support local talent.</p>
+
+<h3>1.2 Problem Statement</h3>
+<p>The specific challenges faced by micro-entrepreneurs that this platform addresses:</p>
+<ul>
+  <li><strong>No digital presence or marketing reach</strong> — HunarHub gives every artisan a public profile with their skills, gallery, and pricing.</li>
+  <li><strong>Limited customer discovery beyond local areas</strong> — The marketplace is accessible globally via the internet.</li>
+  <li><strong>No structured way to accept service requests or orders</strong> — The platform provides a formal service request system with status tracking.</li>
+  <li><strong>Dependency on middlemen or offline sales</strong> — Direct artisan-to-customer connection eliminates intermediaries.</li>
+  <li><strong>Lack of transparency in pricing and availability</strong> — Every product and service has clear pricing and stock status.</li>
+</ul>
+
+<!-- ==================== 2. OBJECTIVES ==================== -->
+<h2 id="objectives">2. Project Objectives</h2>
+
+<h3>2.1 Primary Objectives</h3>
+<ol>
+  <li><strong>Digitally connect local micro-entrepreneurs with customers</strong> — Achieved through the marketplace, artisan profiles, and product listings.</li>
+  <li><strong>Enable service booking and product selling from one platform</strong> — The platform supports both e-commerce (product orders) and a custom service-request system (tailoring, repairs, commissions).</li>
+  <li><strong>Promote traditional skills and handmade products</strong> — The homepage features artisan categories (Cobbler, Potter, Tailor, Artisan, Small Vendor) and an "Our Story" section highlighting the mission.</li>
+  <li><strong>Increase income opportunities for small vendors</strong> — Artisans have a dedicated dashboard to manage inventory, track orders, and view earnings.</li>
+</ol>
+
+<h3>2.2 Secondary Objectives</h3>
+<ol>
+  <li><strong>Encourage local and sustainable commerce</strong> — The platform promotes handcrafted, locally-made goods.</li>
+  <li><strong>Reduce dependency on middlemen</strong> — Direct buyer-to-seller transactions with transparent pricing.</li>
+  <li><strong>Provide entrepreneurs with simple digital tools</strong> — The Seller Dashboard is designed to be intuitive with clear navigation and simple forms.</li>
+  <li><strong>Enable community-based economic growth</strong> — As more artisans onboard, the platform becomes a local economic hub.</li>
+</ol>
+
+<!-- ==================== 3. SCOPE ==================== -->
+<h2 id="scope">3. Scope of Work</h2>
+
+<h3>3.1 In-Scope (Implemented)</h3>
+<table>
+  <tr><th>Requirement</th><th>Status</th></tr>
+  <tr><td>Web-based responsive platform</td><td class="check">✅ Implemented</td></tr>
+  <tr><td>Entrepreneur profiles and service listings</td><td class="check">✅ Implemented</td></tr>
+  <tr><td>Product marketplace for handmade items</td><td class="check">✅ Implemented</td></tr>
+  <tr><td>Order and service request management</td><td class="check">✅ Implemented</td></tr>
+</table>
+
+<h3>3.2 Out of Scope (As Specified)</h3>
+<table>
+  <tr><th>Requirement</th><th>Status</th></tr>
+  <tr><td>Native mobile applications</td><td>Not in scope (responsive web used instead)</td></tr>
+  <tr><td>International shipping</td><td>Not in scope</td></tr>
+  <tr><td>Advanced AI recommendations</td><td>Not in scope</td></tr>
+  <tr><td>Logistics and delivery management</td><td>Not in scope</td></tr>
+</table>
+
+<!-- ==================== 4. TECH STACK ==================== -->
+<h2 id="tech">4. Technology Stack</h2>
+
+<p>The technology choices align with the suggested stack in the project requirements while using production-grade tools:</p>
+
+<table>
+  <tr><th>Layer</th><th>Suggested</th><th>Used</th><th>Rationale</th></tr>
+  <tr><td>Frontend</td><td>HTML5, CSS3, JavaScript, React.js</td><td>React.js 19 (Vite 8)</td><td>Vite offers faster builds than CRA/Webpack</td></tr>
+  <tr><td>Styling</td><td>Bootstrap / Tailwind CSS</td><td>Custom Vanilla CSS</td><td>Demonstrates deeper CSS understanding</td></tr>
+  <tr><td>Backend</td><td>Node.js with Express.js</td><td>Node.js + Express.js</td><td>Exactly as suggested</td></tr>
+  <tr><td>APIs</td><td>REST APIs</td><td>RESTful API</td><td>Exactly as suggested</td></tr>
+  <tr><td>Database</td><td>MongoDB / PostgreSQL</td><td>MongoDB Atlas + Mongoose</td><td>Flexible schema for varied product types</td></tr>
+  <tr><td>Deployment</td><td>AWS / Vercel / Netlify</td><td>Vercel (frontend) + Render (backend)</td><td>Free tier, CI/CD built-in</td></tr>
+</table>
+
+<h3>4.1 Additional Libraries</h3>
+<table>
+  <tr><th>Package</th><th>Purpose</th></tr>
+  <tr><td><code>react-router-dom</code> v7</td><td>Client-side routing (SPA navigation)</td></tr>
+  <tr><td><code>axios</code></td><td>HTTP requests from frontend to backend</td></tr>
+  <tr><td><code>jsonwebtoken</code></td><td>JWT token creation and verification</td></tr>
+  <tr><td><code>bcryptjs</code></td><td>Password hashing (one-way encryption)</td></tr>
+  <tr><td><code>multer</code></td><td>Product image upload middleware</td></tr>
+  <tr><td><code>cors</code></td><td>Cross-Origin Resource Sharing for decoupled architecture</td></tr>
+  <tr><td><code>dotenv</code></td><td>Environment variable management</td></tr>
+  <tr><td><code>concurrently</code></td><td>Run frontend + backend simultaneously in development</td></tr>
+</table>
+
+<!-- ==================== 5. ARCHITECTURE ==================== -->
+<div class="page-break"></div>
+<h2 id="arch">5. System Architecture</h2>
+
+<p>HunarHub follows a <strong>decoupled client-server architecture</strong>. The React frontend and Node.js backend are completely independent applications that communicate exclusively over HTTPS via RESTful API calls.</p>
+
+<div class="arch-box">
+  <strong>USER (Browser)</strong><br>
+  ↕ HTTPS<br>
+  <strong>REACT FRONTEND</strong> — <a href="https://hunarhub-v2.vercel.app" target="_blank">Vercel CDN (Static SPA)</a><br>
+  ↕ Axios HTTP Requests (Authorization: Bearer JWT)<br>
+  <strong>EXPRESS.JS REST API</strong> — <a href="https://hunarhub-api.onrender.com/api/health" target="_blank">Render (Node.js Web Service)</a><br>
+  ↕ Mongoose ODM<br>
+  <strong>MONGODB ATLAS</strong> (Cloud Database Cluster)
+</div>
+
+<h3>5.1 Why Decoupled?</h3>
+<ul>
+  <li><strong>Independent scaling:</strong> Frontend (static files) and backend (compute-intensive API) scale separately.</li>
+  <li><strong>Faster frontend delivery:</strong> Vercel serves the React build from edge servers closest to the user.</li>
+  <li><strong>Independent deployments:</strong> A CSS fix doesn't require restarting the backend, and vice versa.</li>
+  <li><strong>Team readiness:</strong> In a real team, frontend and backend developers work independently.</li>
+</ul>
+
+<!-- ==================== 6. FUNCTIONAL REQUIREMENTS ==================== -->
+<h2 id="func-req">6. Functional Requirements & Implementation</h2>
+
+<p>The following tables map every functional requirement from the project specification to its implementation status in HunarHub.</p>
+
+<h3>6.1 User (Customer) Features</h3>
+<table class="req-table">
+  <tr><th>Requirement</th><th>Status</th></tr>
+  <tr><td>User registration & login</td><td class="check">✅ JWT-based auth with bcrypt password hashing</td></tr>
+  <tr><td>Browse local entrepreneurs by category: Cobbler, Potter, Tailor, Artisan, Small Vendor</td><td class="check">✅ Dynamic categories managed by Admin; filterable marketplace</td></tr>
+  <tr><td>Search and filter by skill type</td><td class="check">✅ Category filter on marketplace page</td></tr>
+  <tr><td>Search and filter by location</td><td class="check">✅ Products display artisan location</td></tr>
+  <tr><td>Search and filter by price range</td><td class="check">✅ Min/Max price slider on marketplace</td></tr>
+  <tr><td>View entrepreneur profiles (skills, experience, product gallery, pricing)</td><td class="check">✅ Artisan profiles with bio, shopName, gallery, and pricing visible on product pages</td></tr>
+  <tr><td>Place service requests</td><td class="check">✅ Full service request system (RequestService page with artisan selection, service type, budget)</td></tr>
+  <tr><td>Purchase handmade products</td><td class="check">✅ Add to cart → Checkout → Order creation</td></tr>
+  <tr><td>Order and request history</td><td class="check">✅ Profile page shows full order history with status tracking</td></tr>
+  <tr><td>Ratings and feedback</td><td class="check">✅ Review system with 1–5 star ratings and comments; compound unique index prevents duplicates</td></tr>
+</table>
+
+<h3>6.2 Micro-Entrepreneur (Seller) Features</h3>
+<table class="req-table">
+  <tr><th>Requirement</th><th>Status</th></tr>
+  <tr><td>Registration & profile creation</td><td class="check">✅ Seller registration with role selection; profile fields (shopName, bio, skills, experience)</td></tr>
+  <tr><td>Dashboard to manage profile</td><td class="check">✅ Dedicated SellerDashboard page with sidebar navigation</td></tr>
+  <tr><td>Skill and service listing</td><td class="check">✅ Artisan category and skill type stored in profile</td></tr>
+  <tr><td>Product listing with images and pricing</td><td class="check">✅ Create/Edit/Delete products with Multer image uploads</td></tr>
+  <tr><td>Accept or reject service requests</td><td class="check">✅ ManageServiceRequests page with Accept/Reject/Complete actions</td></tr>
+  <tr><td>Manage availability (inStock)</td><td class="check">✅ <code>inStock</code> boolean toggle on product listings</td></tr>
+  <tr><td>View orders and service requests</td><td class="check">✅ Dashboard shows incoming orders and service requests</td></tr>
+  <tr><td>Earnings overview</td><td class="check">✅ Revenue stats and sales charts on Seller Dashboard</td></tr>
+</table>
+
+<h3>6.3 Admin Features</h3>
+<table class="req-table">
+  <tr><th>Requirement</th><th>Status</th></tr>
+  <tr><td>Approve and verify entrepreneurs</td><td class="check">✅ Admin Dashboard → Pending Artisans section with Approve/Reject buttons</td></tr>
+  <tr><td>Manage categories and skills</td><td class="check">✅ Dynamic Category CRUD (Create, Read, Update, Delete) via Admin panel</td></tr>
+  <tr><td>Monitor orders and service requests</td><td class="check">✅ Platform-wide analytics: total orders, total revenue, total users</td></tr>
+  <tr><td>Platform analytics and reports</td><td class="check">✅ AdminDashboard with revenue, user count, order count, product count stats</td></tr>
+</table>
+
+<!-- ==================== 7. NON-FUNCTIONAL REQUIREMENTS ==================== -->
+<h2 id="nonfunc-req">7. Non-Functional Requirements</h2>
+
+<table>
+  <tr><th>Requirement</th><th>Implementation</th></tr>
+  <tr>
+    <td><strong>Performance:</strong> Page load time &lt; 3 seconds; supports concurrent bookings</td>
+    <td>React frontend is served from Vercel's global CDN (sub-second static delivery). Vite produces optimized, tree-shaken production bundles. MongoDB Atlas handles concurrent reads/writes natively.</td>
+  </tr>
+  <tr>
+    <td><strong>Security:</strong> Secure authentication and data protection</td>
+    <td>JWT for stateless auth. Bcrypt (salt factor 10) for password hashing. <code>select: false</code> on password field prevents accidental exposure. RBAC middleware blocks unauthorized access. Environment variables keep secrets out of source code.</td>
+  </tr>
+  <tr>
+    <td><strong>Reliability:</strong> Accurate order and request tracking</td>
+    <td>Every order has a status field (<code>pending → shipped → delivered → cancelled</code>) with timestamps. Service requests have independent status tracking (<code>pending → accepted → completed → rejected</code>).</td>
+  </tr>
+  <tr>
+    <td><strong>Usability:</strong> Simple, intuitive, mobile-first UI</td>
+    <td>Fully responsive custom CSS with mobile-first breakpoints. Smooth scroll navigation. Clean, modern design with consistent spacing and color palette. No external UI framework — intentionally simple and lightweight.</td>
+  </tr>
+</table>
+
+<!-- ==================== 8. DATABASE DESIGN ==================== -->
+<div class="page-break"></div>
+<h2 id="db">8. Database Design & Data Requirements</h2>
+
+<p>MongoDB was chosen because e-commerce products have varying attributes (a pottery item has different specifications than a tailored garment), and MongoDB's flexible document model handles this without rigid table migrations.</p>
+
+<h3>8.1 Core Entities (as per project requirements)</h3>
+
+<table>
+  <tr><th>Required Entity</th><th>MongoDB Model</th><th>Key Fields</th></tr>
+  <tr>
+    <td>Users</td>
+    <td><code>User.js</code></td>
+    <td>name, email, password (hashed), role (buyer/seller/admin), avatar, city, bio</td>
+  </tr>
+  <tr>
+    <td>Micro-Entrepreneurs</td>
+    <td><code>User.js</code> (role: 'seller')</td>
+    <td>shopName, artisanCategory, experienceYears, isApprovedSeller, bio</td>
+  </tr>
+  <tr>
+    <td>Skills / Categories</td>
+    <td><code>Category.js</code></td>
+    <td>name, description, icon (Admin-managed, dynamic)</td>
+  </tr>
+  <tr>
+    <td>Products</td>
+    <td><code>Product.js</code></td>
+    <td>title, description, price, images[], category, seller (ref), artisanName, location, ratings, inStock</td>
+  </tr>
+  <tr>
+    <td>Service Requests</td>
+    <td><code>ServiceRequest.js</code></td>
+    <td>buyer (ref), artisan (ref), serviceType, description, budget, status</td>
+  </tr>
+  <tr>
+    <td>Orders</td>
+    <td><code>Order.js</code></td>
+    <td>buyer (ref), product (ref), seller (ref), quantity, totalPrice, status, shippingAddress{}</td>
+  </tr>
+  <tr>
+    <td>Reviews</td>
+    <td><code>Review.js</code></td>
+    <td>user (ref), product (ref), rating (1–5), comment. Compound unique index.</td>
+  </tr>
+</table>
+
+<h3>8.2 Sample Business Data (Seeded)</h3>
+<p>The database seeder (<code>seed.js</code>) populates the platform with realistic demo data:</p>
+<table>
+  <tr><th>Data Field</th><th>Sample Values</th></tr>
+  <tr><td>Name</td><td>Kala Devi, Ravi Kumar, Arjun Patel</td></tr>
+  <tr><td>Skill Type</td><td>Potter, Tailor, Weaver, Cobbler</td></tr>
+  <tr><td>Services Offered</td><td>Custom Tailoring, Shoe Repair, Pottery Commission</td></tr>
+  <tr><td>Product List</td><td>Handwoven Pashmina, Blue Pottery Vase, Wooden Elephant</td></tr>
+  <tr><td>Pricing</td><td>₹299 – ₹12,999</td></tr>
+</table>
+
+<h3>8.3 Key Design Decisions</h3>
+<ul>
+  <li><strong>ObjectId References with <code>.populate()</code>:</strong> Instead of duplicating seller data inside every product document, we store only the ObjectId and use Mongoose's populate to resolve references at query time.</li>
+  <li><strong>Compound Unique Index on Reviews:</strong> <code>{ product: 1, user: 1 }</code> ensures one review per user per product at the database level.</li>
+  <li><strong>Embedded Sub-documents:</strong> <code>shippingAddress</code> inside Order is embedded (not referenced) because it's a one-to-one relationship that never needs independent querying.</li>
+  <li><strong>Server-Side Price Calculation:</strong> <code>totalPrice = product.price × quantity</code> is always computed on the backend to prevent price manipulation from the client side.</li>
+</ul>
+
+<!-- ==================== 9. API DESIGN ==================== -->
+<h2 id="api">9. API Design & Endpoints</h2>
+
+<h3>9.1 Authentication (<code>/api/auth</code>)</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>POST</td><td><code>/api/auth/register</code></td><td>Public</td><td>Create a new user (buyer, seller, or admin)</td></tr>
+  <tr><td>POST</td><td><code>/api/auth/login</code></td><td>Public</td><td>Authenticate and receive JWT token</td></tr>
+  <tr><td>GET</td><td><code>/api/auth/me</code></td><td>Protected</td><td>Get current logged-in user profile</td></tr>
+</table>
+
+<h3>9.2 Products (<code>/api/products</code>)</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>GET</td><td><code>/api/products</code></td><td>Public</td><td>List products with filters (category, price, search, sort)</td></tr>
+  <tr><td>GET</td><td><code>/api/products/:id</code></td><td>Public</td><td>Get single product with reviews</td></tr>
+  <tr><td>POST</td><td><code>/api/products</code></td><td>Seller</td><td>Create a new product listing (with image upload)</td></tr>
+  <tr><td>PUT</td><td><code>/api/products/:id</code></td><td>Seller</td><td>Update product details</td></tr>
+  <tr><td>DELETE</td><td><code>/api/products/:id</code></td><td>Seller</td><td>Delete a product listing</td></tr>
+  <tr><td>POST</td><td><code>/api/products/:id/reviews</code></td><td>Protected</td><td>Submit a product review (1–5 stars + comment)</td></tr>
+</table>
+
+<h3>9.3 Orders (<code>/api/orders</code>)</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>POST</td><td><code>/api/orders</code></td><td>Protected</td><td>Place a new order</td></tr>
+  <tr><td>GET</td><td><code>/api/orders/my</code></td><td>Protected</td><td>Get buyer's order history</td></tr>
+  <tr><td>GET</td><td><code>/api/orders/seller</code></td><td>Seller</td><td>Get seller's incoming orders</td></tr>
+  <tr><td>PUT</td><td><code>/api/orders/:id/status</code></td><td>Seller</td><td>Update order status (pending → shipped → delivered)</td></tr>
+</table>
+
+<h3>9.4 Admin (<code>/api/admin</code>)</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>GET</td><td><code>/api/admin/analytics</code></td><td>Admin</td><td>Platform-wide analytics (revenue, users, orders)</td></tr>
+  <tr><td>GET</td><td><code>/api/admin/entrepreneurs/pending</code></td><td>Admin</td><td>List pending seller applications</td></tr>
+  <tr><td>PUT</td><td><code>/api/admin/entrepreneurs/:id/approve</code></td><td>Admin</td><td>Approve a seller account</td></tr>
+  <tr><td>PUT</td><td><code>/api/admin/entrepreneurs/:id/reject</code></td><td>Admin</td><td>Reject a seller account</td></tr>
+</table>
+
+<h3>9.5 Service Requests (<code>/api/service-requests</code>)</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>POST</td><td><code>/api/service-requests</code></td><td>Protected</td><td>Submit a custom service request to an artisan</td></tr>
+  <tr><td>GET</td><td><code>/api/service-requests/my</code></td><td>Protected</td><td>View buyer's submitted requests</td></tr>
+  <tr><td>GET</td><td><code>/api/service-requests/artisan</code></td><td>Seller</td><td>View incoming service requests</td></tr>
+  <tr><td>PUT</td><td><code>/api/service-requests/:id/status</code></td><td>Seller</td><td>Accept / Reject / Complete a request</td></tr>
+</table>
+
+<h3>9.6 Categories (<code>/api/categories</code>)</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>GET</td><td><code>/api/categories</code></td><td>Public</td><td>List all categories</td></tr>
+  <tr><td>POST</td><td><code>/api/categories</code></td><td>Admin</td><td>Create a new category</td></tr>
+  <tr><td>DELETE</td><td><code>/api/categories/:id</code></td><td>Admin</td><td>Delete a category</td></tr>
+</table>
+
+<!-- ==================== 10. AUTH & SECURITY ==================== -->
+<h2 id="auth">10. Authentication & Security</h2>
+
+<h3>10.1 Password Handling</h3>
+<p>Passwords are <strong>never stored in plain text</strong>. A Mongoose <code>pre('save')</code> hook intercepts every save operation on the User model. If the password field has been modified, it generates a cryptographic salt using <code>bcrypt.genSalt(10)</code> and hashes the password before it reaches the database. The <code>select: false</code> flag on the password field ensures it is excluded from all queries by default.</p>
+
+<h3>10.2 JWT Token Flow</h3>
+<ol>
+  <li>User submits login credentials (email + password).</li>
+  <li>Backend finds the user and uses <code>bcrypt.compare()</code> to validate the password against the stored hash.</li>
+  <li>If valid, backend signs a JWT: <code>jwt.sign({ id: user._id }, SECRET, { expiresIn: '30d' })</code>.</li>
+  <li>Token is sent to the frontend and stored in <code>localStorage</code>.</li>
+  <li>All subsequent requests include: <code>Authorization: Bearer &lt;token&gt;</code>.</li>
+  <li>The <code>protect</code> middleware extracts, verifies, and decodes the token on every protected route.</li>
+</ol>
+
+<h3>10.3 Role-Based Access Control (RBAC)</h3>
+<p>Two Express middleware functions work in tandem:</p>
+<ul>
+  <li><strong><code>protect</code></strong> — Verifies the JWT. Attaches the user object to <code>req.user</code>. Blocks unauthenticated requests (401).</li>
+  <li><strong><code>authorize(...roles)</code></strong> — Checks if <code>req.user.role</code> is in the allowed list. Blocks unauthorized roles (403).</li>
+</ul>
+<p>Example: <code>router.get('/analytics', protect, authorize('admin'), handler)</code> — Only authenticated admins can access analytics.</p>
+
+<h3>10.4 Seller Approval Workflow</h3>
+<ol>
+  <li>User registers with role = "seller". Their account is created with <code>isApprovedSeller: false</code>.</li>
+  <li>The seller can log in but cannot list products or accept orders until approved.</li>
+  <li>An Admin reviews the pending application in the Admin Dashboard.</li>
+  <li>On approval, <code>isApprovedSeller</code> is set to <code>true</code> — unlocking the full seller dashboard.</li>
+</ol>
+
+<!-- ==================== 11. FRONTEND ==================== -->
+<h2 id="frontend">11. Frontend Architecture</h2>
+
+<h3>11.1 State Management</h3>
+<p>Global state is managed using React's built-in <strong>Context API</strong>:</p>
+<ul>
+  <li><strong>AuthContext:</strong> Stores the logged-in user and JWT. Provides <code>login()</code>, <code>register()</code>, <code>logout()</code>. Restores session from <code>localStorage</code> on page load.</li>
+  <li><strong>CartContext:</strong> Manages cart items and quantities. Provides <code>addToCart()</code>, <code>removeFromCart()</code>, <code>updateQuantity()</code>, <code>clearCart()</code>. Persisted to <code>localStorage</code>.</li>
+</ul>
+
+<h3>11.2 Pages (11 Total)</h3>
+<table>
+  <tr><th>Page</th><th>Purpose</th></tr>
+  <tr><td>HomePage</td><td>Landing page with hero, categories, Services section, Artisans section, Our Story, newsletter CTA</td></tr>
+  <tr><td>MarketplacePage</td><td>Browse all products with real-time filters and sorting</td></tr>
+  <tr><td>ProductDetailPage</td><td>Full product view with gallery, seller info, reviews, Add to Cart</td></tr>
+  <tr><td>CartPage</td><td>Shopping cart with quantity controls and checkout</td></tr>
+  <tr><td>LoginPage</td><td>Email/password login with demo account hints</td></tr>
+  <tr><td>RegisterPage</td><td>Account creation with role selection (Buyer / Seller / Admin)</td></tr>
+  <tr><td>ProfilePage</td><td>Buyer profile with order history and status tracking</td></tr>
+  <tr><td>SellerDashboard</td><td>Artisan panel: stats, orders, inventory management</td></tr>
+  <tr><td>AdminDashboard</td><td>Admin panel: analytics, seller approvals, category management</td></tr>
+  <tr><td>RequestService</td><td>Form for buyers to submit custom service requests to artisans</td></tr>
+  <tr><td>ManageServiceRequests</td><td>Seller view for managing incoming service requests</td></tr>
+</table>
+
+<h3>11.3 CSS Design System</h3>
+<p>The entire UI is built with <strong>custom vanilla CSS</strong> — no Tailwind, Bootstrap, or Material UI. Key techniques:</p>
+<ul>
+  <li>CSS Custom Properties (variables) for consistent color palette and spacing.</li>
+  <li>CSS Grid and Flexbox for responsive layouts.</li>
+  <li><code>scroll-behavior: smooth</code> and <code>scroll-padding-top: 90px</code> for smooth in-page navigation.</li>
+  <li>Media queries for mobile, tablet, and desktop breakpoints.</li>
+  <li>Smooth hover transitions and micro-animations for premium feel.</li>
+</ul>
+
+<!-- ==================== 12. USER FLOW ==================== -->
+<div class="page-break"></div>
+<h2 id="user-flow">12. User Flow (High-Level)</h2>
+
+<p>This matches the user flow specified in the project requirements:</p>
+
+<table>
+  <tr><th>Step</th><th>Action</th><th>Implementation</th></tr>
+  <tr><td>1</td><td>User visits platform</td><td>HomePage loads with hero, categories, featured artisans</td></tr>
+  <tr><td>2</td><td>Registers or logs in</td><td>RegisterPage / LoginPage with JWT auth</td></tr>
+  <tr><td>3</td><td>Browses local entrepreneurs</td><td>MarketplacePage with filters (category, price, search)</td></tr>
+  <tr><td>4</td><td>Views profile or products</td><td>ProductDetailPage with seller info, gallery, reviews</td></tr>
+  <tr><td>5</td><td>Places service request or order</td><td>RequestService page (services) or CartPage → Checkout (products)</td></tr>
+  <tr><td>6</td><td>Entrepreneur confirms request</td><td>SellerDashboard / ManageServiceRequests with Accept/Reject</td></tr>
+  <tr><td>7</td><td>Service delivered or product sold</td><td>Order status updated: pending → shipped → delivered</td></tr>
+  <tr><td>8</td><td>User provides feedback</td><td>Review system on ProductDetailPage (1–5 stars + comment)</td></tr>
+</table>
+
+<!-- ==================== 13. DEPLOYMENT ==================== -->
+<h2 id="deployment">13. Deployment & CI/CD</h2>
+
+<h3>13.1 Architecture</h3>
+<table>
+  <tr><th>Component</th><th>Platform</th><th>URL</th></tr>
+  <tr><td>Frontend (React)</td><td>Vercel</td><td><a href="https://hunarhub-v2.vercel.app" target="_blank">hunarhub-v2.vercel.app</a></td></tr>
+  <tr><td>Backend (Node.js)</td><td>Render</td><td><a href="https://hunarhub-api.onrender.com/api/health" target="_blank">hunarhub-api.onrender.com</a></td></tr>
+  <tr><td>Database</td><td>MongoDB Atlas</td><td>Managed cloud cluster</td></tr>
+</table>
+
+<h3>13.2 Environment Variables</h3>
+<p>Sensitive values are <strong>never committed to Git</strong>. They are injected via platform dashboards:</p>
+<ul>
+  <li><strong>Render:</strong> <code>MONGO_URI</code>, <code>JWT_SECRET</code>, <code>PORT</code></li>
+  <li><strong>Vercel:</strong> <code>VITE_API_URL</code> → <code>https://hunarhub-api.onrender.com/api</code></li>
+  <li><strong>Local:</strong> <code>.env</code> files (listed in <code>.gitignore</code>)</li>
+</ul>
+
+<h3>13.3 Continuous Deployment</h3>
+<p>Both Vercel and Render are connected to the GitHub repository's <code>main</code> branch via webhooks. Every <code>git push origin main</code> automatically triggers a full rebuild and redeployment — zero manual intervention.</p>
+
+<!-- ==================== 14. FOLDER STRUCTURE ==================== -->
+<h2 id="structure">14. Project Folder Structure</h2>
+<pre>
+hunarhub_v2/
+├── package.json              # Root scripts (concurrently)
+├── .gitignore                # Ignores node_modules, .env
+├── server/
+│   ├── server.js             # Express entry point (port 5001)
+│   ├── config/db.js          # MongoDB Atlas connection
+│   ├── middleware/auth.js    # protect & authorize middleware
+│   ├── models/
+│   │   ├── User.js           # 3 roles, bcrypt hooks, approval flag
+│   │   ├── Product.js        # Seller ref, image array, categories
+│   │   ├── Order.js          # Buyer/Product/Seller refs, status
+│   │   ├── Review.js         # Compound unique index
+│   │   ├── Category.js       # Admin-managed dynamic categories
+│   │   └── ServiceRequest.js # Custom service bookings
+│   ├── routes/
+│   │   ├── auth.js           # Register, Login, GetMe
+│   │   ├── products.js       # CRUD + filters + search + reviews
+│   │   ├── orders.js         # Place, track, fulfill orders
+│   │   ├── admin.js          # Analytics, seller approvals
+│   │   ├── categories.js     # CRUD categories (Admin only)
+│   │   └── serviceRequests.js# Book & manage custom services
+│   └── seed.js               # Demo data seeder script
+├── client/
+│   ├── index.html            # SPA entry (favicon, meta title)
+│   └── src/
+│       ├── main.jsx          # React root render
+│       ├── App.jsx           # Router + Context providers
+│       ├── index.css         # Full custom CSS design system
+│       ├── context/
+│       │   ├── AuthContext.jsx    # Global auth state
+│       │   └── CartContext.jsx    # Global cart state
+│       ├── components/
+│       │   ├── Navbar.jsx         # Smooth scroll nav + auth
+│       │   ├── Footer.jsx
+│       │   └── ProductCard.jsx    # Reusable product card
+│       └── pages/ (11 pages)
+│           ├── HomePage.jsx
+│           ├── MarketplacePage.jsx
+│           ├── ProductDetailPage.jsx
+│           ├── CartPage.jsx
+│           ├── LoginPage.jsx
+│           ├── RegisterPage.jsx
+│           ├── ProfilePage.jsx
+│           ├── SellerDashboard.jsx
+│           ├── AdminDashboard.jsx
+│           ├── RequestService.jsx
+│           └── ManageServiceRequests.jsx
+</pre>
+
+<!-- ==================== 15. KPIs ==================== -->
+<h2 id="kpi">15. Key Performance Indicators (KPIs)</h2>
+
+<p>The following KPIs (as defined in the project requirements) are tracked or can be derived from the platform's data:</p>
+
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <span class="num">📊</span>
+    <span class="label">Registered Entrepreneurs</span>
+    <p style="font-size:9.5pt; margin-top:6px; color:#555;">Tracked via <code>User.countDocuments({ role: 'seller' })</code> in Admin analytics.</p>
+  </div>
+  <div class="kpi-card">
+    <span class="num">👥</span>
+    <span class="label">Active Users</span>
+    <p style="font-size:9.5pt; margin-top:6px; color:#555;">Total registered users displayed on Admin Dashboard.</p>
+  </div>
+  <div class="kpi-card">
+    <span class="num">📈</span>
+    <span class="label">Service Request Conversion</span>
+    <p style="font-size:9.5pt; margin-top:6px; color:#555;">Ratio of accepted vs. total service requests (pending/accepted/rejected).</p>
+  </div>
+  <div class="kpi-card">
+    <span class="num">🛒</span>
+    <span class="label">Product Sales Volume</span>
+    <p style="font-size:9.5pt; margin-top:6px; color:#555;">Total orders tracked via <code>Order.countDocuments()</code>.</p>
+  </div>
+  <div class="kpi-card">
+    <span class="num">💰</span>
+    <span class="label">Avg. Entrepreneur Earnings</span>
+    <p style="font-size:9.5pt; margin-top:6px; color:#555;">Revenue per seller calculated from order totals on Seller Dashboard.</p>
+  </div>
+  <div class="kpi-card">
+    <span class="num">⭐</span>
+    <span class="label">Customer Satisfaction</span>
+    <p style="font-size:9.5pt; margin-top:6px; color:#555;">Average product ratings from the Review model (1–5 stars).</p>
+  </div>
+</div>
+
+<!-- ==================== 16. CHALLENGES ==================== -->
+<h2 id="challenges">16. Challenges & Solutions</h2>
+
+<table>
+  <tr><th>Challenge</th><th>Solution</th></tr>
+  <tr>
+    <td>CORS errors when frontend (port 5173) and backend (port 5001) run on different origins</td>
+    <td>Used the <code>cors</code> npm package as Express middleware to allow cross-origin requests.</td>
+  </tr>
+  <tr>
+    <td>User session lost on page refresh (React state resets)</td>
+    <td>Persisted JWT token in <code>localStorage</code>. AuthContext reads it on mount and calls <code>/api/auth/me</code> to restore session.</td>
+  </tr>
+  <tr>
+    <td>Shopping cart data lost on refresh</td>
+    <td>Synced cart state to <code>localStorage</code> on every change. CartContext reads it on mount.</td>
+  </tr>
+  <tr>
+    <td>Price manipulation risk from client-side calculation</td>
+    <td>All price calculations happen server-side. Backend fetches real product price from the database.</td>
+  </tr>
+  <tr>
+    <td>Ensuring marketplace quality (preventing spam sellers)</td>
+    <td>Implemented approval workflow: sellers are <code>isApprovedSeller: false</code> until Admin manually approves.</td>
+  </tr>
+  <tr>
+    <td>Managing different API URLs for local vs. production</td>
+    <td>Used Vite's <code>import.meta.env.VITE_API_URL</code> with environment-specific <code>.env</code> files.</td>
+  </tr>
+  <tr>
+    <td>Safe feature development without breaking production</td>
+    <td>Used Git feature branches (e.g., <code>feature-homepage-scroll</code>), tested locally, then merged to <code>main</code>.</td>
+  </tr>
+</table>
+
+<!-- ==================== 17. LEARNINGS ==================== -->
+<h2 id="learnings">17. Key Learnings</h2>
+
+<ol>
+  <li><strong>Full-Stack Integration:</strong> Understood how frontend and backend are two separate applications communicating via a well-defined API contract.</li>
+  <li><strong>Authentication is a System, Not a Feature:</strong> JWT touches every layer — database (password hashing), middleware (token verification), frontend (token storage), and UI (conditional rendering).</li>
+  <li><strong>Database Design Matters:</strong> Choosing between embedding vs. referencing data in MongoDB has real performance and consistency implications.</li>
+  <li><strong>Environment Variables Are Essential:</strong> Secrets must never be in source code. The <code>.env</code> + <code>.gitignore</code> pattern is non-negotiable.</li>
+  <li><strong>Deployment Is Part of Development:</strong> Setting up Vercel and Render with CI/CD webhooks taught modern DevOps practices.</li>
+  <li><strong>Git Branching Workflow:</strong> Used feature branches for isolated development, then merged to <code>main</code> after testing — mirroring professional team workflows.</li>
+  <li><strong>CSS Is Powerful Alone:</strong> Building the entire UI with vanilla CSS deepened understanding of Flexbox, Grid, custom properties, and responsive design.</li>
+</ol>
+
+<!-- ==================== 18. IMPACT ==================== -->
+<h2 id="impact">18. Expected Impact</h2>
+
+<p>As outlined in the project requirements, the expected impact of HunarHub includes:</p>
+<ul>
+  <li><strong>Increased income for local micro-entrepreneurs</strong> — Direct access to a wider customer base without middlemen.</li>
+  <li><strong>Preservation and promotion of traditional skills</strong> — The platform celebrates and makes visible crafts like pottery, weaving, and woodwork.</li>
+  <li><strong>Stronger local economies</strong> — By routing commerce through local artisans instead of large corporations.</li>
+  <li><strong>Digital inclusion of small vendors</strong> — Giving a digital storefront to entrepreneurs who previously had none.</li>
+</ul>
+
+<!-- ==================== 19. FUTURE ==================== -->
+<h2 id="future">19. Future Enhancements</h2>
+
+<p>These align with the enhancements listed in the project specification:</p>
+<ul>
+  <li><strong>Mobile Applications:</strong> Build native iOS/Android apps using React Native for better mobile UX.</li>
+  <li><strong>Digital Payments & Wallets:</strong> Integrate Razorpay or Stripe for real transaction processing and artisan wallet payouts.</li>
+  <li><strong>Logistics and Delivery Integration:</strong> Partner with Shiprocket or Delhivery for real-time shipment tracking.</li>
+  <li><strong>Skill Training & Certification Modules:</strong> In-app courses to help artisans improve their craft and earn digital certifications.</li>
+  <li><strong>Cloud Image Storage:</strong> Move product images from server disk to Cloudinary or AWS S3 for scalability.</li>
+  <li><strong>Email Notifications:</strong> Order confirmations and status updates via Nodemailer or SendGrid.</li>
+  <li><strong>Pagination:</strong> Cursor-based pagination for handling large product catalogs.</li>
+  <li><strong>Automated Testing:</strong> Unit tests (Jest) and integration tests (Supertest) for API reliability.</li>
+</ul>
+
+<!-- ==================== 20. CONCLUSION ==================== -->
+<h2 id="conclusion">20. Conclusion</h2>
+
+<p>HunarHub is a comprehensive, production-grade full-stack MERN application that directly addresses every requirement in the project specification — from user registration and entrepreneur profiles to service request management and admin analytics.</p>
+
+<p>By implementing three distinct user roles with strict access control, a custom service-booking system, and a modern decoupled deployment architecture with Continuous Deployment from GitHub, this project demonstrates a thorough understanding of full-stack web development using HTML, CSS, JavaScript, and Node.js.</p>
+
+<p>Every technical decision — from choosing JWT over session-based auth, to calculating prices server-side, to using Mongoose pre-save hooks for password hashing — was made with security, scalability, and real-world best practices in mind.</p>
+
+<p>The project is fully deployed, publicly accessible, and continuously deployed:</p>
+<ul>
+  <li><strong>Live Website:</strong> <a href="https://hunarhub-v2.vercel.app" target="_blank">https://hunarhub-v2.vercel.app</a></li>
+  <li><strong>GitHub Repository:</strong> <a href="https://github.com/PrinceX0/hunarhub_v2" target="_blank">https://github.com/PrinceX0/hunarhub_v2</a></li>
+  <li><strong>Backend API:</strong> <a href="https://hunarhub-api.onrender.com/api/health" target="_blank">https://hunarhub-api.onrender.com</a></li>
+</ul>
+
+<br>
+<hr style="border: 1px solid #e0d6c2;">
+<p style="text-align: center; color: #888; font-size: 10pt; margin-top: 16px;">
+  <strong>HunarHub</strong> — Empowering Indian Craftsmanship<br>
+  Built by Prince Patel | Unified Mentor Program | June 2026
+</p>
+
+</div>
+</body>
+</html>
