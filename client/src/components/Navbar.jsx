@@ -13,7 +13,18 @@ const Navbar = () => {
     <nav className="navbar" id="main-navbar">
       <div className="navbar-inner">
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Link to="/" className="navbar-logo">HunarHub</Link>
+          <Link 
+            to="/" 
+            className="navbar-logo"
+            onClick={(e) => {
+              if (location.pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
+            HunarHub
+          </Link>
           <div className="navbar-links">
             <Link to="/marketplace" className={isActive('/marketplace') ? 'active' : ''}>
               Marketplace
