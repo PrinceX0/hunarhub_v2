@@ -1,0 +1,3 @@
+PORT=5001
+MONGO_URI=mongodb+srv://prince:mL9pp3tHRrcg8k4r@hunarhub.rrfcaev.mongodb.net/hunarhub?appName=HunarHub
+JWT_SECRET=hunarhub_jwt_secret_key_change_in_production
