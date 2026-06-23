@@ -145,6 +145,50 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Services Section */}
+      <section className="section" id="services">
+        <div className="section-inner">
+          <div style={{ textAlign: 'center', marginBottom: 64 }}>
+            <h2 className="text-headline-lg" style={{ marginBottom: 16 }}>Custom Services & Repairs</h2>
+            <p className="text-body-md" style={{ color: 'var(--color-on-surface-variant)', maxWidth: 640, margin: '0 auto' }}>
+              Need something custom made or repaired? Book our expert artisans for personalized services directly through the platform.
+            </p>
+          </div>
+          <div className="grid-3">
+            <div className="card">
+              <div className="card-body" style={{ textAlign: 'center' }}>
+                <div style={{ width: 64, height: 64, background: 'var(--color-primary-container)', color: 'var(--color-on-primary-container)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 32 }}>cut</span>
+                </div>
+                <h3 className="text-headline-md" style={{ marginBottom: 12 }}>Custom Tailoring</h3>
+                <p className="text-body-md" style={{ color: 'var(--color-on-surface-variant)', marginBottom: 24 }}>Get traditional garments stitched to your exact measurements by local master tailors.</p>
+                <Link to="/marketplace?tab=services" className="btn btn-secondary-outline">Book Service</Link>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body" style={{ textAlign: 'center' }}>
+                <div style={{ width: 64, height: 64, background: 'var(--color-secondary-container)', color: 'var(--color-on-secondary-container)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 32 }}>build</span>
+                </div>
+                <h3 className="text-headline-md" style={{ marginBottom: 12 }}>Shoe Repair</h3>
+                <p className="text-body-md" style={{ color: 'var(--color-on-surface-variant)', marginBottom: 24 }}>Restore your favorite footwear with authentic cobbler services using high-quality leather.</p>
+                <Link to="/marketplace?tab=services" className="btn btn-secondary-outline">Book Service</Link>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body" style={{ textAlign: 'center' }}>
+                <div style={{ width: 64, height: 64, background: 'var(--color-tertiary-container)', color: 'var(--color-on-tertiary-container)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 32 }}>format_paint</span>
+                </div>
+                <h3 className="text-headline-md" style={{ marginBottom: 12 }}>Custom Artwork</h3>
+                <p className="text-body-md" style={{ color: 'var(--color-on-surface-variant)', marginBottom: 24 }}>Commission personalized paintings, pottery, or woodwork directly from the artists.</p>
+                <Link to="/marketplace?tab=services" className="btn btn-secondary-outline">Book Service</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Master Artisans */}
       <section className="section section-bg-container" id="artisans-section">
         <div className="section-inner">
@@ -205,6 +249,35 @@ const HomePage = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story */}
+      <section className="section" id="our-story">
+        <div className="section-inner" style={{ display: 'flex', flexDirection: 'column', gap: 48, alignItems: 'center' }}>
+          <div style={{ textAlign: 'center', maxWidth: 800 }}>
+            <h2 className="text-headline-lg" style={{ marginBottom: 24 }}>Our Story</h2>
+            <p className="text-body-lg" style={{ color: 'var(--color-on-surface-variant)', marginBottom: 24, lineHeight: 1.8 }}>
+              HunarHub was born from a simple observation: India's rich heritage of craftsmanship was slowly fading as local artisans struggled to reach modern consumers. The master weavers, potters, cobblers, and tailors who hold generations of knowledge were being left behind in the digital age.
+            </p>
+            <p className="text-body-lg" style={{ color: 'var(--color-on-surface-variant)', lineHeight: 1.8 }}>
+              We built this platform to bridge that gap. By providing micro-entrepreneurs with a direct, transparent connection to global buyers, we are ensuring that traditional skills are not just preserved, but empowered to thrive. Every purchase or service booked here directly supports an artisan's livelihood and family.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div style={{ textAlign: 'center', padding: '24px 48px', background: 'var(--color-surface-container-low)', borderRadius: 'var(--radius-xl)' }}>
+              <h3 className="text-display-lg text-primary">1.2k+</h3>
+              <p className="text-label-md">Artisans Empowered</p>
+            </div>
+            <div style={{ textAlign: 'center', padding: '24px 48px', background: 'var(--color-surface-container-low)', borderRadius: 'var(--radius-xl)' }}>
+              <h3 className="text-display-lg text-primary">₹5M+</h3>
+              <p className="text-label-md">Generated for Creators</p>
+            </div>
+            <div style={{ textAlign: 'center', padding: '24px 48px', background: 'var(--color-surface-container-low)', borderRadius: 'var(--radius-xl)' }}>
+              <h3 className="text-display-lg text-primary">15+</h3>
+              <p className="text-label-md">Crafts Preserved</p>
+            </div>
           </div>
         </div>
       </section>

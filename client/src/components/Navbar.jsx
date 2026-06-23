@@ -18,15 +18,15 @@ const Navbar = () => {
             <Link to="/marketplace" className={isActive('/marketplace') ? 'active' : ''}>
               Marketplace
             </Link>
-            <Link to="/marketplace?tab=services" className={isActive('/services') ? 'active' : ''}>
+            <a href="/#services" className={location.hash === '#services' ? 'active' : ''}>
               Services
-            </Link>
-            <Link to="/" className={isActive('/artisans') ? 'active' : ''}>
+            </a>
+            <a href="/#artisans-section" className={location.hash === '#artisans-section' ? 'active' : ''}>
               Artisans
-            </Link>
-            <Link to="/" className={isActive('/story') ? 'active' : ''}>
+            </a>
+            <a href="/#our-story" className={location.hash === '#our-story' ? 'active' : ''}>
               Our Story
-            </Link>
+            </a>
           </div>
         </div>
 
