@@ -1,0 +1,16 @@
+{
+  "name": "hunarhub",
+  "version": "1.0.0",
+  "description": "HunarHub - Digital Marketplace for Indian Artisans",
+  "scripts": {
+    "server": "cd server && node server.js",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seed": "cd server && node seed.js",
+    "install-all": "cd server && npm install && cd ../client && npm install"
+  },
+  "dependencies": {
+    "all": "^0.0.0",
+    "concurrently": "^8.2.2"
+  }
+}
