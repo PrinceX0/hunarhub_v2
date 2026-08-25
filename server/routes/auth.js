@@ -18,6 +18,14 @@ router.post('/register', async (req, res) => {
   try {
     const { name, email, password, role, city } = req.body;
 
+    // Public registration may only ever create a buyer or an UNAPPROVED seller.
+    // The role is authority-granting, so it is never trusted from the client:
+    // anything other than these two values silently falls back to 'buyer'.
+    // Admin accounts are provisioned out of band (seed script, or promotion
+    // by an existing admin through a protect + authorize('admin') route).
+    const SELF_SERVICE_ROLES = ['buyer', 'seller'];
+    const safeRole = SELF_SERVICE_ROLES.includes(role) ? role : 'buyer';
+
     const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).json({ message: 'User already exists' });
@@ -27,7 +35,7 @@ router.post('/register', async (req, res) => {
       name,
       email,
       password,
-      role: role || 'buyer',
+      role: safeRole,
       city: city || '',
       skills: req.body.skills || [],
       experience: req.body.experience || '',

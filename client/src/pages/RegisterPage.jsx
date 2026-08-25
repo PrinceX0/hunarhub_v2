@@ -111,16 +111,6 @@ const RegisterPage = () => {
                 <span className="material-symbols-outlined" style={{ color: formData.role === 'seller' ? 'var(--color-primary)' : 'var(--color-on-surface-variant)' }}>storefront</span>
                 <span className="text-label-md" style={{ color: formData.role === 'seller' ? 'var(--color-primary)' : 'var(--color-on-surface-variant)' }}>Sell Crafts</span>
               </button>
-              <button type="button" onClick={() => setFormData({...formData, role: 'admin'})}
-                style={{
-                  flex: 1, padding: '10px 12px', borderRadius: 'var(--radius-md)',
-                  border: `2px solid ${formData.role === 'admin' ? '#1e40af' : 'var(--color-outline-variant)'}`,
-                  background: formData.role === 'admin' ? 'rgba(30,64,175,0.1)' : 'transparent',
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, cursor: 'pointer'
-                }} id="role-admin">
-                <span className="material-symbols-outlined" style={{ color: formData.role === 'admin' ? '#1e40af' : 'var(--color-on-surface-variant)' }}>admin_panel_settings</span>
-                <span className="text-label-md" style={{ color: formData.role === 'admin' ? '#1e40af' : 'var(--color-on-surface-variant)' }}>Admin</span>
-              </button>
             </div>
           </div>
 

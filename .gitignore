@@ -1,8 +1,28 @@
+# ---- dependencies & build output ----
 node_modules/
-.env
-.env.*
-!.env.example
 dist/
 build/
-.DS_Store
+
+# ---- secrets: allowlist shape, not a blocklist ----
+# Anything that looks like an env file is ignored; the template is the
+# ONLY exception. Adding a new backup (.env2, .env.bak, prod.env) is
+# now covered automatically instead of needing a new line each time.
+.env
+.env*
+*.env
+*.env.*
+!.env.example
+
+# ---- credentials & keys ----
+*.pem
+*.key
+*.p12
+id_rsa*
+secrets.*
+credentials.*
+
+# ---- local working files ----
+notes/
 server/uploads/
+.DS_Store
+*.log
