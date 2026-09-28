@@ -24,5 +24,6 @@ credentials.*
 # ---- local working files ----
 notes/
 server/uploads/
+output/
 .DS_Store
 *.log
